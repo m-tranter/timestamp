@@ -28,28 +28,20 @@ app.get('/api/hello', function (req, res) {
 });
 
 app.get('/api/:date?', function (req, res) {
+  let date = req.params.date;
   let myDate;
-  console.log(req.params.date);
-  if (!req.params.date || req.params.date === '') {
+  if (!date || date === '') {
     myDate = new Date();
     res.json({ unix: myDate.getTime(), utc: myDate.toUTCString() });
-    
-
-  if (isNum(req.params.date)) {
-    myDate = new Date(parseInt(req.params.date));
   } else {
-    myDate = new Date(req.params.date);
+    myDate = isNum(date) ? new Date(parseInt(date)) : new Date(date);
+    let utc = myDate.toUTCString();
+    if (utc === 'Invalid Date') {
+      res.json({ error: 'Invalid date' });
+    } else {
+      res.json({ unix: myDate.getTime(), utc: utc });
+    }
   }
-  
-  let utc = myDate.toUTCString();
-  if (utc === 'Invalid Date') {
-    console.log(utc);
-    res.json({ error: 'Invalid date' });
-  }
-
-  console.log(utc);
-  res.json({ unix: myDate.getTime(), utc: utc });
-
 });
 
 const port = process.env.PORT ? process.env.PORT : 3001;
