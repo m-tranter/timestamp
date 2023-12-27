@@ -28,6 +28,7 @@ app.get('/api/hello', function (req, res) {
 });
 
 app.get('/api/:date?', function (req, res) {
+  console.log(req.params.date);
   let myDate;
   if (!req.params.date) {
     myDate = new Date();
