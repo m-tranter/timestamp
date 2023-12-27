@@ -5,6 +5,10 @@
 var express = require('express');
 var app = express();
 
+function isNum(value) {
+  return /^-?\d+$/.test(value);
+}
+
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC
 var cors = require('cors');
@@ -28,7 +32,11 @@ app.get('/api/:date?', function (req, res) {
   if (!req.params.date) {
     myDate = new Date();
   } else {
-    myDate = new Date(req.params.date);
+    if (isNum(req.params.date)) {
+      myDate = new Date(parseInt(req.params.date));
+    } else {
+      myDate = new Date(req.params.date);
+    }
   }
   let utc = myDate.toUTCString();
   if (utc === 'Invalid Date') {
