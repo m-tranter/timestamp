@@ -28,9 +28,9 @@ app.get('/api/hello', function (req, res) {
 });
 
 app.get('/api/:date?', function (req, res) {
-  console.log(req.params.date);
   let myDate;
-  if (!req.params.date) {
+  console.log(req.params.date);
+  if (!req.params.date || req.params.date === '') {
     myDate = new Date();
   } else {
     if (isNum(req.params.date)) {
