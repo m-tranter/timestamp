@@ -26,6 +26,7 @@ app.get('/api/:date?', function (req, res) {
   let myDate = !date
     ? new Date()
     : new Date(isNum(date) ? parseInt(date) : date);
+  myDate = new Date(myDate.getTime() - 30000);
   let utc = myDate.toUTCString();
   let unix = myDate.getTime();
   res.json(
