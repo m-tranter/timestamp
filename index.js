@@ -18,20 +18,23 @@ app.use(myLogger);
 //app.use(express.static('public'));
 
 app.get('/api', function (req, res) {
+  console.log("Empty");
   let myDate = new Date();
+   console.log(date);
   let utc = myDate.toUTCString();
+    console.log(utc);
   res.json({ unix: myDate.getTime(), utc: utc });
 });
 
 
 app.get('/api/:date?', function (req, res) {
   let date = req.params.date;
-  console.log(date);
-  let myDate = !date
+ 
+  let myDate = !date.length
     ? new Date()
     : new Date(isNum(date) ? parseInt(date) : date);
   let utc = myDate.toUTCString();
-  console.log(utc);
+
   res.json(
     utc === 'Invalid Date'
       ? { error: 'Invalid date' }
@@ -42,7 +45,5 @@ app.get('/api/:date?', function (req, res) {
 const port = process.env.PORT ? process.env.PORT : 3001;
 const listener = app.listen(port, function () {
   console.log('Your app is listening on port ' + listener.address().port);
-  let d = new Date();
-  var timezone =  d.getTimezoneOffset();
-  console.log(timezone);
+
 });
