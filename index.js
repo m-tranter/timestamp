@@ -27,7 +27,7 @@ app.get('/api', function (req, res) {
 });
 
 
-app.get('/api/:date?', function (req, res) {
+app.get('/api/:date', function (req, res) {
   let date = req.params.date;
  
   let myDate = !date.length
