@@ -15,11 +15,14 @@ function isNum(value) {
 
 app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 204
 app.use(myLogger);
-app.use(express.static('public'));
+//app.use(express.static('public'));
 
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+app.get('/*', function (req, res) {
+  let myDate = new Date();
+  let utc = myDate.toUTCString();
+  res.json({ unix: myDate.getTime(), utc: utc });
 });
+
 
 app.get('/api/:date?', function (req, res) {
   let date = req.params.date;
@@ -27,11 +30,10 @@ app.get('/api/:date?', function (req, res) {
     ? new Date()
     : new Date(isNum(date) ? parseInt(date) : date);
   let utc = myDate.toUTCString();
-  let unix = myDate.getTime();
   res.json(
     utc === 'Invalid Date'
       ? { error: 'Invalid date' }
-      : { unix, utc }
+      : { unix: myDate.getTime(), utc: utc }
   );
 });
 
