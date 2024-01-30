@@ -42,6 +42,7 @@ app.get('/api/:date?', function (req, res) {
 const port = process.env.PORT ? process.env.PORT : 3001;
 const listener = app.listen(port, function () {
   console.log('Your app is listening on port ' + listener.address().port);
+  let d = new Date();
   var timezone =  d.getTimezoneOffset();
   console.log(timezone);
 });
