@@ -20,17 +20,14 @@ app.use(myLogger);
 app.get('/api', function (req, res) {
   console.log("Empty");
   let myDate = new Date();
-   console.log(date);
   let utc = myDate.toUTCString();
-    console.log(utc);
   res.json({ unix: myDate.getTime(), utc: utc });
 });
 
 
 app.get('/api/:date', function (req, res) {
   let date = req.params.date;
- 
-  let myDate = !date.length
+  let myDate = !date
     ? new Date()
     : new Date(isNum(date) ? parseInt(date) : date);
   let utc = myDate.toUTCString();
