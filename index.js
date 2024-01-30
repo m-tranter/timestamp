@@ -17,7 +17,7 @@ app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 2
 app.use(myLogger);
 //app.use(express.static('public'));
 
-app.get('/*', function (req, res) {
+app.get('/api', function (req, res) {
   let myDate = new Date();
   let utc = myDate.toUTCString();
   res.json({ unix: myDate.getTime(), utc: utc });
