@@ -26,10 +26,12 @@ app.get('/api', function (req, res) {
 
 app.get('/api/:date?', function (req, res) {
   let date = req.params.date;
+  console.log(date);
   let myDate = !date
     ? new Date()
     : new Date(isNum(date) ? parseInt(date) : date);
   let utc = myDate.toUTCString();
+  console.log(utc);
   res.json(
     utc === 'Invalid Date'
       ? { error: 'Invalid date' }
