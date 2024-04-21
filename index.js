@@ -17,15 +17,8 @@ app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 2
 app.use(myLogger);
 //app.use(express.static('public'));
 
-app.get("/", function (req, res) {
-  let myDate = new Date();
-  let utc = myDate.toUTCString();
-  res.json({ unix: myDate.getTime(), utc: utc });
-});
-
 app.get("/api/:date", function (req, res) {
   let date = req.params.date;
-  console.log(date);
   let myDate = !date
     ? new Date()
     : new Date(isNum(date) ? parseInt(date) : date);
@@ -37,7 +30,7 @@ app.get("/api/:date", function (req, res) {
   );
 });
 
-app.get("/api", function (req, res) {
+app.get("/api*", function (req, res) {
   let myDate = new Date();
   let utc = myDate.toUTCString();
   res.json({ unix: myDate.getTime(), utc: utc });
