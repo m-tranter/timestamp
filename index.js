@@ -23,17 +23,19 @@ app.get("/api/:date", function (req, res) {
     ? new Date()
     : new Date(isNum(date) ? parseInt(date) : date);
   let utc = myDate.toUTCString();
-  res.json(
-    utc === "Invalid Date"
+  let obj =   utc === "Invalid Date"
       ? { error: "Invalid date" }
-      : { unix: myDate.getTime(), utc: utc },
-  );
+      : { unix: myDate.getTime(), utc: utc };
+  console.log(obj);
+  res.json(obj);
 });
 
 app.get("*", function (req, res) {
   let myDate = new Date();
   let utc = myDate.toUTCString();
-  res.json({ unix: myDate.getTime(), utc: utc });
+  let obj = { unix: myDate.getTime(), utc: utc };
+  console.log(obj);
+  res.json(obj);
 });
 
 const port = process.env.PORT ? process.env.PORT : 3001;
