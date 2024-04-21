@@ -30,7 +30,7 @@ app.get("/api/:date", function (req, res) {
   );
 });
 
-app.get("/api*", function (req, res) {
+app.get("*", function (req, res) {
   let myDate = new Date();
   let utc = myDate.toUTCString();
   res.json({ unix: myDate.getTime(), utc: utc });
