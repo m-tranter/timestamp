@@ -23,7 +23,7 @@ app.get("/", function (req, res) {
   res.json({ unix: myDate.getTime(), utc: utc });
 });
 
-app.get("/api/:date?", function (req, res) {
+app.get("/api/:date", function (req, res) {
   let date = req.params.date;
   console.log(date);
   let myDate = !date
@@ -35,6 +35,12 @@ app.get("/api/:date?", function (req, res) {
       ? { error: "Invalid date" }
       : { unix: myDate.getTime(), utc: utc },
   );
+});
+
+app.get("/api", function (req, res) {
+  let myDate = new Date();
+  let utc = myDate.toUTCString();
+  res.json({ unix: myDate.getTime(), utc: utc });
 });
 
 const port = process.env.PORT ? process.env.PORT : 3001;
